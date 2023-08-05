@@ -1,0 +1,52 @@
+{
+  "manifest_version": 2,
+  "name": "ChineseFormatter",
+  "description": "Replace English punctuation with Chinese punctuation",
+  "version": "1.4.0",
+  "icons": {
+    "128": "icon/icon.png",
+    "16": "icon/icon.png",
+    "48": "icon/icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon/icon.png",
+      "38": "icon/icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": ["js/context-menu.js"]
+  },
+  "incognito": "spanning",
+  "content_security_policy": "script-src 'unsafe-eval' 'self'; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "activeTab"
+  ],
+  "commands": {
+    "formatAndCopy": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2",
+        "mac": "MacCtrl+C"
+      },
+      "description": "Format to chinese punctuation and copy to clipboard"
+    }
+  },
+  "web_accessible_resources": [
+    "css/*",
+    "js/*"
+  ]
+}

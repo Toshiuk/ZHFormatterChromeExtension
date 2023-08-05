@@ -1,0 +1,12 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="ES6UnusedImports" enabled="true" level="WARNING" enabled_by_default="false">
+      <scope name="Non tests stories js,ts,jsx,tsx files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="JSUnusedGlobalSymbols" enabled="true" level="WARNING" enabled_by_default="false">
+      <scope name="Non tests stories js,ts,jsx,tsx files" level="WARNING" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="JsonSchemaCompliance" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>
