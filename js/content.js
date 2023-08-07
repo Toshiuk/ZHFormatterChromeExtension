@@ -8,7 +8,7 @@ const formatText = (text) => {
         formattedText += '.';
     }
 
-    formattedText = formattedText.replace(/[.!?,"()\[\]{};:<>~/'『]|(?<!\w) (?!\w)/g, function (m) {
+    formattedText = formattedText.replace(/[.!?,"()\[\]{};:<>~/'、『]|(?<!\w) (?!\w)/g, function (m) {
         m === '"' && quoteCount++;
         m === "'" && singleQuoteCount++;
         return {
