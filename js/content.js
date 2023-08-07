@@ -4,11 +4,11 @@ const formatText = (text) => {
 
     let formattedText = text.replace(/(\r\n|\n|\r)/gm, "");
 
-    if(!(/[.!?]/g.test(formattedText.at(-1)))) {
+    if(!(/[.!?。！？]/g.test(formattedText.at(-1)))) {
         formattedText += '.';
     }
 
-    formattedText = formattedText.replace(/[.!?, "()\[\]{};:<>~/']/g, function (m) {
+    formattedText = formattedText.replace(/[.!?,"()\[\]{};:<>~/'『]|(?<!\w) (?!\w)/g, function (m) {
         m === '"' && quoteCount++;
         m === "'" && singleQuoteCount++;
         return {
@@ -29,12 +29,15 @@ const formatText = (text) => {
             '>': '》',
             '~': '～',
             '/': '／',
-            '"': (quoteCount % 2) ? '『' : '』',
+            '『': '『 ',
+            '、': '，',
+            '"': (quoteCount % 2) ? '『 ' : '』',
             "'": (singleQuoteCount % 2) ? '「' : '」'
         }[m];
     });
 
     formattedText = formattedText.replace(/。{2,}/g, "...");
+    formattedText = formattedText.replace(/\.{3,}(?=.+)/g, "... ");
 
     return formattedText;
 }
