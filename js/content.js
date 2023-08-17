@@ -4,7 +4,7 @@ const formatText = (text) => {
 
     let formattedText = text.replace(/(\r\n|\n|\r)/gm, "");
 
-    if(!(/[.!?。！？]/g.test(formattedText.at(-1)))) {
+    if(!(/[.!?~,、。！？～，]/g.test(formattedText.at(-1)))) {
         formattedText += '.';
     }
 
@@ -38,6 +38,7 @@ const formatText = (text) => {
 
     formattedText = formattedText.replace(/。{2,}/g, "...");
     formattedText = formattedText.replace(/\.{3,}(?=.+)/g, "... ");
+    formattedText = formattedText.replace(/，$/g, "。");
 
     return formattedText;
 }

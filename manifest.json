@@ -40,7 +40,7 @@
     "formatAndCopy": {
       "suggested_key": {
         "default": "Ctrl+Shift+2",
-        "mac": "MacCtrl+C"
+        "mac": "MacCtrl+F"
       },
       "description": "Format to chinese punctuation and copy to clipboard"
     }
