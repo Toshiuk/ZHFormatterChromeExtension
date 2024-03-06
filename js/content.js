@@ -4,11 +4,10 @@ const formatText = (text) => {
 
     let formattedText = text.replace(/(\r\n|\n|\r)/gm, "");
 
-    if(!(/[.!?~,、。！？～，]/g.test(formattedText.at(-1)))) {
-        formattedText += '.';
-    }
+    // replace all quotes
+    formattedText = formattedText.replace(/[『』'「」“”]/g, '"');
 
-    formattedText = formattedText.replace(/[.!?,"()\[\]{};:<>~/'、『]|(?<!\w) (?!\w)/g, function (m) {
+    formattedText = formattedText.replace(/[.!?,"()\[\]{};:<>~/、]|(?<!\w) (?!\w)/g, function (m) {
         m === '"' && quoteCount++;
         m === "'" && singleQuoteCount++;
         return {
@@ -29,16 +28,25 @@ const formatText = (text) => {
             '>': '》',
             '~': '～',
             '/': '／',
-            '『': '『 ',
             '、': '，',
-            '"': (quoteCount % 2) ? '『 ' : '』',
-            "'": (singleQuoteCount % 2) ? '「' : '」'
+            '"': (quoteCount % 2) ? '「' : '」',
         }[m];
     });
 
-    formattedText = formattedText.replace(/。{2,}/g, "...");
-    formattedText = formattedText.replace(/\.{3,}(?=.+)/g, "... ");
-    formattedText = formattedText.replace(/，$/g, "。");
+    formattedText = formattedText.replace(/。{3,}(?=.+)/g, "… ");
+    formattedText = formattedText.replace(/。{2,}/g, "…");
+
+    // replace multiple "…" Ex: Chinese word………… = Chinese word…
+    formattedText = formattedText.replace(/…{2,}/g, "…");
+
+    if(!(/[、。！？～，…]/g.test(formattedText.at(-1)))) {
+        formattedText += '。';
+    }
+
+    // replace with decimal points
+    // 2019年的1。63下降到2022年的1。19。❌ =>2019年的1.63下降到2022年的1.19✔️
+
+    formattedText = formattedText.replace(/(?<=\d+)。(?=\d+)/g, ".");
 
     return formattedText;
 }
